@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Discover trending posts from Reddit by category. Search any subreddit and explore the hottest content with beautiful previews.">
+    <title>Reddit Trends - Discover What's Hot</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <h1>Reddit<span class="gradient-text">Trends</span></h1>
+            </div>
+            <p class="tagline">Discover what's trending on Reddit</p>
+        </header>
+
+        <div class="search-section">
+            <div class="search-container">
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/>
+                    <path d="M21 21L16.65 16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                <input 
+                    type="text" 
+                    id="categoryInput" 
+                    class="search-input" 
+                    placeholder="Enter subreddit or category (e.g., technology, gaming, news)"
+                    autocomplete="off"
+                >
+                <button id="searchBtn" class="search-btn">
+                    <span>Search</span>
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="quick-categories">
+                <span class="quick-label">Popular:</span>
+                <button class="category-chip" data-category="popular">Popular</button>
+                <button class="category-chip" data-category="technology">Technology</button>
+                <button class="category-chip" data-category="gaming">Gaming</button>
+                <button class="category-chip" data-category="worldnews">World News</button>
+                <button class="category-chip" data-category="science">Science</button>
+            </div>
+        </div>
+
+        <div id="loadingState" class="loading-state hidden">
+            <div class="spinner"></div>
+            <p>Fetching trending posts...</p>
+        </div>
+
+        <div id="errorState" class="error-state hidden">
+            <svg class="error-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                <path d="M12 8V12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="12" cy="16" r="1" fill="currentColor"/>
+            </svg>
+            <h3 id="errorTitle">Oops! Something went wrong</h3>
+            <p id="errorMessage">Please try again or search for a different category.</p>
+        </div>
+
+        <div id="resultsInfo" class="results-info hidden">
+            <h2 id="resultsTitle">Trending in <span class="gradient-text">r/popular</span></h2>
+            <p id="resultsCount">0 posts found</p>
+        </div>
+
+        <div id="postsGrid" class="posts-grid"></div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
