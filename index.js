@@ -31,8 +31,13 @@ app.get('/api/trends', async (req, res) => {
         // Make request to Reddit's public JSON API
         const response = await axios.get(redditUrl, {
             headers: {
-                'User-Agent': 'RedditTrendsApp/1.0'
-            }
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+                'Accept': 'application/json',
+                'Accept-Language': 'en-US,en;q=0.9',
+                'Accept-Encoding': 'gzip, deflate, br',
+                'Connection': 'keep-alive'
+            },
+            timeout: 10000
         });
 
         // Extract relevant post data
@@ -65,6 +70,11 @@ app.get('/api/trends', async (req, res) => {
 
     } catch (error) {
         console.error('Error fetching Reddit data:', error.message);
+        console.error('Error details:', {
+            status: error.response?.status,
+            statusText: error.response?.statusText,
+            data: error.response?.data
+        });
 
         if (error.response?.status === 404) {
             res.status(404).json({
@@ -76,10 +86,16 @@ app.get('/api/trends', async (req, res) => {
                 success: false,
                 error: 'Rate limit exceeded. Please try again later.'
             });
+        } else if (error.code === 'ECONNABORTED') {
+            res.status(504).json({
+                success: false,
+                error: 'Request timeout. Reddit is taking too long to respond.'
+            });
         } else {
             res.status(500).json({
                 success: false,
-                error: 'Failed to fetch Reddit data. Please try again.'
+                error: 'Failed to fetch Reddit data. Please try again.',
+                details: process.env.NODE_ENV === 'development' ? error.message : undefined
             });
         }
     }
