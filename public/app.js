@@ -1,5 +1,8 @@
 // API Configuration
-const API_BASE_URL = 'http://localhost:3000';
+// Use relative URL in production (Vercel), localhost in development
+const API_BASE_URL = window.location.hostname === 'localhost'
+    ? 'http://localhost:3000'
+    : '';
 
 // DOM Elements
 const categoryInput = document.getElementById('categoryInput');
