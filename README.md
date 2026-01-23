@@ -97,7 +97,7 @@ A modern, beautiful web application that lets you discover trending posts from R
    - Go to [vercel.com](https://vercel.com)
    - Click "New Project"
    - Import your GitHub repository
-   - Vercel will automatically detect the configuration
+   - **IMPORTANT**: In the "Framework Preset" dropdown, select **"Express.js"**
    - Click "Deploy"
 
 3. **Done!** 🎉
@@ -107,13 +107,11 @@ A modern, beautiful web application that lets you discover trending posts from R
 
 ```
 reddittrend/
-├── api/
-│   └── trends.js       # Vercel serverless API function
 ├── public/
 │   ├── index.html      # Main HTML file
 │   ├── app.js          # Frontend JavaScript
 │   └── styles.css      # Styling with CSS variables
-├── server.js           # Express server (for local dev)
+├── index.js            # Express server & API routes
 ├── vercel.json         # Vercel configuration
 ├── package.json        # Dependencies & scripts
 ├── .env.example        # Environment variables template
@@ -121,7 +119,7 @@ reddittrend/
 └── README.md           # This file
 ```
 
-**Note**: The `/api` directory contains serverless functions that Vercel automatically deploys. The `server.js` file is used for local development only.
+**Note**: This is a standard Express.js application. When deploying to Vercel, select **"Express.js"** as the framework.
 
 ## 🔧 Configuration
 

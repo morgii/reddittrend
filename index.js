@@ -93,3 +93,6 @@ app.get('/', (req, res) => {
 app.listen(PORT, () => {
     console.log(`🚀 Reddit Trends Server running on http://localhost:${PORT}`);
 });
+
+// Export for Vercel
+module.exports = app;
