@@ -90,9 +90,12 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-app.listen(PORT, () => {
-    console.log(`🚀 Reddit Trends Server running on http://localhost:${PORT}`);
-});
+// Only start server if not in Vercel environment
+if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+    app.listen(PORT, () => {
+        console.log(`🚀 Reddit Trends Server running on http://localhost:${PORT}`);
+    });
+}
 
 // Export for Vercel
 module.exports = app;
